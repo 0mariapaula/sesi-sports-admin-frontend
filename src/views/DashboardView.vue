@@ -64,8 +64,10 @@ export default {
   ); /* Ocupa o restante da altura da viewport menos o header */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
+  /* Remove align-items: center; para que os elementos não sejam centralizados por padrão, permitindo alinhamento à esquerda */
   color: #333;
+  width: 100%; /* Garante que o conteúdo ocupe a largura total disponível */
+  box-sizing: border-box; /* Inclui padding na largura */
 }
 
 /* Títulos principais */
@@ -74,14 +76,19 @@ export default {
   color: #2c3e50;
   margin-bottom: 10px;
   font-weight: 700;
-  text-align: center;
+  text-align: center; /* Mantém centralizado como na imagem */
+  width: 100%; /* Garante que o título centralizado ocupe a largura total */
 }
 
 .welcome-subtitle {
   font-size: 1.2em;
   color: #555;
   margin-bottom: 50px;
-  text-align: center;
+  text-align: left; /* Alinhado à esquerda */
+  width: 100%; /* Ocupa a largura total para o alinhamento */
+  max-width: 1200px; /* Alinha com a largura máxima do grid */
+  margin-left: auto; /* Centraliza o bloco, mas o texto dentro fica à esquerda */
+  margin-right: auto;
 }
 
 .modules-title {
@@ -89,21 +96,27 @@ export default {
   color: #2c3e50;
   margin-bottom: 30px;
   font-weight: 600;
-  text-align: center;
-  width: 100%;
+  text-align: left; /* Alinhado à esquerda */
+  width: 100%; /* Ocupa a largura total para o alinhamento */
+  max-width: 1200px; /* Alinha com a largura máxima do grid */
+  margin-left: auto; /* Centraliza o bloco, mas o texto dentro fica à esquerda */
+  margin-right: auto;
 }
 
 /* Grid para os cartões dos módulos */
 .modules-grid {
   display: grid;
+  /* Ajuste para 3 colunas em telas maiores, com um minmax que não estique demais */
   grid-template-columns: repeat(
     auto-fit,
-    minmax(280px, 1fr)
-  ); /* 4 colunas responsivas, mínimo 280px */
+    minmax(300px, 1fr)
+  ); /* Ajustado minmax para cards um pouco maiores */
   gap: 30px; /* Espaçamento entre os cartões */
   width: 100%;
-  max-width: 1200px; /* Largura máxima do grid */
+  max-width: 1200px; /* Largura máxima do grid para controle visual */
   margin-top: 20px;
+  margin-left: auto; /* Centraliza o grid horizontalmente */
+  margin-right: auto;
 }
 
 /* Estilo de cada cartão de módulo */
@@ -183,7 +196,7 @@ export default {
 @media (max-width: 768px) {
   .modules-grid {
     grid-template-columns: 1fr; /* Uma coluna em telas menores */
-    padding: 0 15px;
+    padding: 0 15px; /* Adiciona padding lateral para telas menores */
   }
   .welcome-title {
     font-size: 2em;
@@ -191,6 +204,7 @@ export default {
   .welcome-subtitle,
   .modules-title {
     font-size: 1em;
+    text-align: center; /* Centraliza novamente em telas pequenas se for o caso */
   }
   .dashboard-content {
     padding: 20px 15px;

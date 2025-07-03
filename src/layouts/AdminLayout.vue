@@ -56,195 +56,200 @@
 export default {
   name: "AdminLayout",
   methods: {
-    logout() {
-      alert("Saindo..."); // Simulação de logout
-      this.$router.push("/"); // Redireciona para a tela de login
-    },
     goToProfile() {
-      alert(
-        "Clicou na bolinha de perfil! Aqui irá para a edição do perfil do técnico/admin."
-      );
-      // Exemplo: this.$router.push('/admin/profile');
+      alert("Navegar para o perfil do usuário!");
+    },
+    logout() {
+      alert("Usuário deslogado!");
+      this.$router.push("/");
     },
   },
 };
 </script>
 
 <style scoped>
+/* Estilos gerais do layout */
 .admin-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f9fa; /* Fundo mais claro, quase branco para o corpo do painel */
-  font-family: "Roboto", sans-serif; /* Uma fonte mais comum para interfaces */
+  background-color: #f0f2f5;
 }
 
-/* Cabeçalho */
+/* Estilos da barra de navegação superior */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2c3e50; /* Cor escura do Figma para o cabeçalho */
-  padding: 10px 40px; /* Mais padding para os lados */
-  color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  height: 70px; /* Altura fixa para o cabeçalho */
+  background-color: #ffffff;
+  padding: 15px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo-area {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 .header-logo {
-  height: 45px; /* Tamanho do logo ajustado */
-  margin-right: 15px;
+  width: 153px;
+  height: 35px;
+  object-fit: contain;
 }
 
 .app-name {
-  font-size: 1.8em; /* Tamanho do texto "SESI Sports" */
-  font-weight: 700; /* Negrito */
-  color: #ecf0f1; /* Cor mais clara para o texto */
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
 }
 
 .main-nav {
   display: flex;
-  gap: 30px; /* Espaçamento maior entre os itens do menu principal */
+  gap: 20px;
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .nav-item {
-  color: #ecf0f1; /* Cor mais clara para os links */
   text-decoration: none;
-  font-weight: 600; /* Semi-negrito */
-  padding: 8px 0;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
-  position: relative; /* Para o efeito de underline */
+  color: #555;
+  font-weight: 500;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
-.nav-item::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 3px;
-  background: #42b983; /* Cor do underline */
-  bottom: -5px;
-  left: 0;
-  transition: width 0.3s ease-in-out;
+.nav-item:hover {
+  color: #42b983;
 }
 
-.nav-item:hover::after,
-.nav-item.router-link-exact-active::after {
-  width: 100%;
-}
-
-.nav-item:hover,
 .nav-item.router-link-exact-active {
-  color: #42b983; /* Verde para item ativo/hover */
+  color: #42b983;
+  border-bottom: 2px solid #42b983;
 }
 
 .user-profile-and-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .profile-circle {
   width: 40px;
   height: 40px;
-  background-color: #bdc3c7; /* Cor cinza para a bolinha */
+  background-color: #42b983;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  font-size: 1.2em;
   cursor: pointer;
-  font-size: 1.4em; /* Tamanho do ícone de usuário */
-  color: #2c3e50; /* Cor escura para o ícone */
   transition: background-color 0.3s ease;
+  flex-shrink: 0;
 }
 
 .profile-circle:hover {
-  background-color: #95a5a6;
+  background-color: #36a47a;
 }
 
 .logout-btn {
-  background-color: #e74c3c; /* Vermelho para o botão de sair */
+  background-color: #164194;
+  width: 95px;
+  height: 40px;
+  border-radius: 5.39px;
+  padding: 13px 20px;
+  gap: 6px;
   color: white;
   border: none;
-  padding: 8px 20px;
-  border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1em;
+  font-size: 0.9em;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logout-btn:hover {
-  background-color: #c0392b;
+  background-color: #12347a;
 }
 
-/* Conteúdo Principal e Sidebar */
+/* Wrapper para o conteúdo principal e a barra lateral */
 .content-wrapper {
   display: flex;
-  flex: 1; /* Ocupa o espaço restante verticalmente */
+  flex: 1;
 }
 
+/* Estilos da barra lateral */
 .sidebar {
-  width: 250px; /* Largura da barra lateral */
-  background-color: #34495e; /* Cor mais escura para a sidebar (similar ao Figma) */
-  padding: 20px 0; /* Padding vertical, sem horizontal para os itens se alinharem */
+  width: 220px;
+  background-color: #e6e6e6; /* Cor da coluna: #E6E6E6 */
+  padding-top: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .sidebar-item,
 .sidebar-sub-item {
-  color: #ecf0f1; /* Cor clara para os links */
+  color: #3f3f3f; /* Cor dos nomes: #3F3F3F */
   text-decoration: none;
-  padding: 12px 25px; /* Padding para os itens do menu lateral */
+  padding: 12px 25px;
   margin-bottom: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  display: block; /* Para ocupar a largura total do item */
-  font-weight: 500;
+  display: block;
+
+  /* Novas propriedades de fonte dos nomes */
+  font-family: "Inter", sans-serif; /* Adicionado Inter, com fallback */
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 18.72px; /* Line-height exato */
 }
 
 .sidebar-item:hover,
 .sidebar-sub-item:hover {
   background-color: rgba(66, 185, 131, 0.2); /* Verde mais suave para hover */
-  color: #42b983;
+  color: #42b983; /* Manter cor verde no hover para consistência */
 }
 
 .sidebar-item.router-link-exact-active,
 .sidebar-sub-item.router-link-exact-active {
   background-color: #42b983; /* Verde forte para item ativo */
   color: white; /* Texto branco quando ativo */
-  font-weight: 600;
+  font-weight: 600; /* Manter bold quando ativo */
 }
 
 .sidebar-section {
   margin-top: 25px;
   padding-top: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Linha divisória */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-section-title {
-  color: #bdc3c7; /* Cor para títulos de seção */
-  font-weight: bold;
-  margin-bottom: 10px;
+  color: #3f3f3f; /* Ajustado para a cor dos nomes */
+  font-size: 22px; /* Ajustado para o tamanho dos nomes */
+  font-weight: 400; /* Ajustado para o peso dos nomes */
+  font-family: "Inter", sans-serif;
+  padding: 0 25px 10px;
   display: block;
-  padding-left: 25px; /* Alinha com os itens */
-  font-size: 0.9em;
-  text-transform: uppercase;
+  text-transform: none; /* Remover uppercase se não for desejado */
+  line-height: 18.72px;
 }
 
-.sidebar-sub-item {
-  padding-left: 45px; /* Indentação para sub-itens */
-  font-size: 0.9em;
-}
-
+/* Estilos do conteúdo principal */
 .main-content {
-  flex: 1; /* Ocupa o restante do espaço horizontal */
-  padding: 30px;
-  overflow-y: auto; /* Adiciona scroll se o conteúdo for muito grande */
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 </style>

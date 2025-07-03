@@ -12,7 +12,10 @@
 
     <div class="profile-section">
       <div class="avatar"></div>
-      <button class="logout-btn">Sair <span class="icon">⇨</span></button>
+      <button class="logout-btn">
+        Sair
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
     </div>
   </nav>
 </template>
@@ -28,9 +31,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff; /* Cor de fundo conforme o Figma */
-  padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  padding: 8px 24px;
 }
 
 .logo-container {
@@ -39,7 +41,7 @@ export default {
 }
 
 .logo {
-  height: 40px;
+  height: 30px;
 }
 
 .menu {
@@ -52,9 +54,14 @@ export default {
 
 .menu li a {
   text-decoration: none;
-  color: #333333;
-  font-weight: 500;
+  color: #333;
+  font-weight: 400;
   position: relative;
+  font-size: 15px;
+}
+
+.menu li a.active {
+  font-weight: 700;
 }
 
 .menu li a.active::after {
@@ -62,7 +69,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 2px;
-  background-color: #333333;
+  background-color: #333;
   bottom: -4px;
   left: 0;
 }
@@ -76,28 +83,29 @@ export default {
 .avatar {
   width: 35px;
   height: 35px;
-  background-color: #555555;
+  background-color: #444;
   border-radius: 50%;
 }
 
 .logout-btn {
-  background-color: #d32f2f; /* Vermelho padrão do Figma */
-  color: #ffffff;
+  background-color: #0d47a1;
+  color: #fff;
   border: none;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
+  font-size: 14px;
 }
 
 .logout-btn:hover {
-  background-color: #b71c1c;
+  background-color: #08306b;
 }
 
-.icon {
+.logout-btn i {
   font-size: 14px;
 }
 </style>
