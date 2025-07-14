@@ -1,19 +1,21 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from "vue-router";
+
+// Páginas públicas
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 
-// Importe os componentes do painel administrativo
-import AdminLayout from "../layouts/AdminLayout.vue"; // O LAYOUT PRINCIPAL
+// Layout do admin + rotas protegidas
+import AdminLayout from "../layouts/AdminLayout.vue";
 import DashboardView from "../views/DashboardView.vue";
 import ClientList from "../views/ClientList.vue";
 import ClientForm from "../views/ClientForm.vue";
 import TechnicianForm from "../views/TechnicianForm.vue";
-import AgendaView from "../views/AgendaView.vue"; // Componente para a tela de agenda
+import AgendaView from "../views/AgendaView.vue";
 
 const routes = [
   {
-    path: "/", // Rota raiz: DEVE ser a tela de Login
+    path: "/",
     name: "login",
     component: LoginView,
   },
@@ -22,50 +24,46 @@ const routes = [
     name: "register",
     component: RegisterView,
   },
-  // Rota pai para o painel administrativo que usa o AdminLayout
   {
-    path: "/admin", // O caminho base para todas as rotas do admin
-    component: AdminLayout, // O componente AdminLayout será renderizado aqui
+    path: "/admin",
+    component: AdminLayout,
     children: [
-      // AS ROTAS FILHAS SERÃO RENDERIZADAS DENTRO DO <router-view /> DO AdminLayout
       {
-        path: "dashboard", // Rota completa: /admin/dashboard
+        path: "dashboard",
         name: "dashboard",
         component: DashboardView,
       },
       {
-        path: "clients", // Rota completa: /admin/clients
+        path: "clients",
         name: "ClientList",
         component: ClientList,
       },
       {
-        path: "clients/new", // Rota completa: /admin/clients/new
+        path: "clients/new",
         name: "ClientNew",
         component: ClientForm,
       },
       {
-        path: "clients/edit/:id", // Rota completa: /admin/clients/edit/:id
+        path: "clients/edit/:id",
         name: "ClientEdit",
         component: ClientForm,
         props: true,
       },
       {
-        path: "technicians/new", // Rota completa: /admin/technicians/new
+        path: "technicians/new",
         name: "TechnicianNew",
         component: TechnicianForm,
       },
       {
-        path: "agenda", // Rota completa: /admin/agenda
+        path: "agenda",
         name: "AgendaView",
         component: AgendaView,
       },
-      // Uma rota para a seção de 'Cadastros' que pode levar a um dashboard ou lista de opções
       {
-        path: "cadastros", // Rota completa: /admin/cadastros
+        path: "cadastros",
         name: "CadastrosHome",
-        component: DashboardView, // Por enquanto, pode ser o Dashboard, ou crie um componente específico
+        component: DashboardView,
       },
-      // Redireciona de /admin para /admin/dashboard se o path for exatamente /admin
       {
         path: "",
         redirect: { name: "dashboard" },
@@ -75,7 +73,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(), // ← Aqui está a correção
   routes,
 });
 

@@ -1,22 +1,17 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
-<script>
-export default {
-  name: "App",
-};
+<script setup>
+// ✅ Nenhuma importação ou constante desnecessária aqui
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+/* ✅ Estilos globais opcionais podem ficar aqui, se houver */
+
+body {
   margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 </style>

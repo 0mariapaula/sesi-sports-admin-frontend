@@ -1,213 +1,135 @@
 <template>
-  <div class="dashboard-content">
-    <h1 class="welcome-title">Bem-vindo ao SESI Sports!</h1>
-    <p class="welcome-subtitle">Acesse rapidamente os módulos do sistema.</p>
+  <div class="dashboard">
+    <h1>Dashboard</h1>
 
-    <h2 class="modules-title">Módulos do Sistema</h2>
-    <div class="modules-grid">
-      <router-link to="/admin/clients" class="module-card">
-        <div class="card-icon">
-          <font-awesome-icon :icon="['fas', 'users']" />
-        </div>
-        <h3 class="card-title">Clientes</h3>
-        <p class="card-description">Gerencie todos os clientes cadastrados.</p>
-        <button class="card-button">Acessar</button>
-      </router-link>
+    <div class="view-toggle">
+      <button :class="{ active: mode === 'day' }" @click="mode = 'day'">
+        Dia
+      </button>
+      <button :class="{ active: mode === 'week' }" @click="mode = 'week'">
+        Semana
+      </button>
+      <button :class="{ active: mode === 'month' }" @click="mode = 'month'">
+        Mês
+      </button>
+    </div>
 
-      <router-link to="/admin/technicians/new" class="module-card">
-        <div class="card-icon">
-          <font-awesome-icon :icon="['fas', 'user-gear']" />
-        </div>
-        <h3 class="card-title">Técnicos</h3>
-        <p class="card-description">Gerencie e cadastre novos técnicos.</p>
-        <button class="card-button">Acessar</button>
-      </router-link>
+    <div class="summary-cards">
+      <div class="card azul">
+        <h3>Agendas</h3>
+        <p class="count">148</p>
+        <small>Apenas confirmadas</small>
+      </div>
+      <div class="card verde">
+        <h3>Matrículas</h3>
+        <p class="count">220</p>
+        <small>Apenas confirmadas</small>
+      </div>
+      <div class="card laranja">
+        <h3>Competições</h3>
+        <p class="count">03</p>
+        <small>Apenas confirmadas</small>
+      </div>
+    </div>
 
-      <router-link to="/admin/agenda" class="module-card">
-        <div class="card-icon">
-          <font-awesome-icon :icon="['fas', 'calendar-alt']" />
-        </div>
-        <h3 class="card-title">Agendamentos</h3>
-        <p class="card-description">
-          Consulte e gerencie a agenda de serviços.
-        </p>
-        <button class="card-button">Acessar</button>
-      </router-link>
+    <h2>Informações Gerais</h2>
 
-      <router-link to="/admin/dashboard" class="module-card">
-        <div class="card-icon">
-          <font-awesome-icon :icon="['fas', 'chart-bar']" />
-        </div>
-        <h3 class="card-title">Relatórios</h3>
-        <p class="card-description">
-          Visualize dados e estatísticas do sistema.
-        </p>
-        <button class="card-button">Acessar</button>
-      </router-link>
+    <div class="charts">
+      <div class="chart-box">
+        <h4>Acompanhamento Mensal</h4>
+        <MonthlyChart />
+      </div>
+      <div class="chart-box">
+        <h4>Acompanhamento Anual</h4>
+        <AnnualChart />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import MonthlyChart from "@/components/MonthlyChart.vue";
+import AnnualChart from "@/components/AnnualChart.vue";
+
 export default {
   name: "DashboardView",
+  components: {
+    MonthlyChart,
+    AnnualChart,
+  },
+  data() {
+    return {
+      mode: "month",
+    };
+  },
 };
 </script>
 
 <style scoped>
-/* Estilos para o container principal do Dashboard */
-.dashboard-content {
-  padding: 40px;
-  background-color: #f0f2f5; /* Fundo suave para a área de conteúdo */
-  min-height: calc(
-    100vh - 60px
-  ); /* Ocupa o restante da altura da viewport menos o header */
-  display: flex;
-  flex-direction: column;
-  /* Remove align-items: center; para que os elementos não sejam centralizados por padrão, permitindo alinhamento à esquerda */
-  color: #333;
-  width: 100%; /* Garante que o conteúdo ocupe a largura total disponível */
-  box-sizing: border-box; /* Inclui padding na largura */
-}
-
-/* Títulos principais */
-.welcome-title {
-  font-size: 2.8em;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-weight: 700;
-  text-align: center; /* Mantém centralizado como na imagem */
-  width: 100%; /* Garante que o título centralizado ocupe a largura total */
-}
-
-.welcome-subtitle {
-  font-size: 1.2em;
-  color: #555;
-  margin-bottom: 50px;
-  text-align: left; /* Alinhado à esquerda */
-  width: 100%; /* Ocupa a largura total para o alinhamento */
-  max-width: 1200px; /* Alinha com a largura máxima do grid */
-  margin-left: auto; /* Centraliza o bloco, mas o texto dentro fica à esquerda */
-  margin-right: auto;
-}
-
-.modules-title {
-  font-size: 2em;
-  color: #2c3e50;
-  margin-bottom: 30px;
-  font-weight: 600;
-  text-align: left; /* Alinhado à esquerda */
-  width: 100%; /* Ocupa a largura total para o alinhamento */
-  max-width: 1200px; /* Alinha com a largura máxima do grid */
-  margin-left: auto; /* Centraliza o bloco, mas o texto dentro fica à esquerda */
-  margin-right: auto;
-}
-
-/* Grid para os cartões dos módulos */
-.modules-grid {
-  display: grid;
-  /* Ajuste para 3 colunas em telas maiores, com um minmax que não estique demais */
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(300px, 1fr)
-  ); /* Ajustado minmax para cards um pouco maiores */
-  gap: 30px; /* Espaçamento entre os cartões */
-  width: 100%;
-  max-width: 1200px; /* Largura máxima do grid para controle visual */
-  margin-top: 20px;
-  margin-left: auto; /* Centraliza o grid horizontalmente */
-  margin-right: auto;
-}
-
-/* Estilo de cada cartão de módulo */
-.module-card {
-  background-color: #ffffff;
-  border-radius: 15px; /* Bordas mais arredondadas */
+.dashboard {
   padding: 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
-  text-align: center;
-  text-decoration: none; /* Remover sublinhado do link */
-  color: inherit; /* Herdar cor do texto */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação suave */
-  display: flex; /* Para centralizar conteúdo verticalmente */
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 250px; /* Altura mínima para manter uniformidade */
+  font-family: sans-serif;
 }
-
-.module-card:hover {
-  transform: translateY(-10px); /* Efeito de elevação no hover */
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Sombra maior no hover */
-}
-
-/* Ícone do cartão */
-.card-icon {
-  font-size: 3.5em; /* Tamanho do ícone */
-  color: #42b983; /* Cor verde do tema */
-  margin-bottom: 20px;
-  width: 80px; /* Tamanho fixo para o container do ícone */
-  height: 80px;
-  background-color: #e6ffee; /* Fundo mais claro para o ícone */
-  border-radius: 50%; /* Torna o fundo redondo */
+.view-toggle {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Sombra sutil para o círculo */
+  justify-content: end;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-
-/* Título do cartão */
-.card-title {
-  font-size: 1.8em;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-/* Descrição do cartão */
-.card-description {
-  font-size: 1em;
-  color: #666;
-  margin-bottom: 25px;
-  line-height: 1.5;
-}
-
-/* Botão do cartão */
-.card-button {
-  background-color: #007bff; /* Azul padrão para o botão */
-  color: white;
-  padding: 12px 25px;
+.view-toggle button {
+  background: #eee;
   border: none;
-  border-radius: 8px;
+  padding: 6px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1.05em;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  width: 80%; /* Ocupa uma boa parte da largura do card */
-  max-width: 200px;
 }
-
-.card-button:hover {
-  background-color: #0056b3; /* Azul mais escuro no hover */
-  transform: translateY(-2px);
+.view-toggle button.active {
+  background: black;
+  color: white;
 }
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .modules-grid {
-    grid-template-columns: 1fr; /* Uma coluna em telas menores */
-    padding: 0 15px; /* Adiciona padding lateral para telas menores */
-  }
-  .welcome-title {
-    font-size: 2em;
-  }
-  .welcome-subtitle,
-  .modules-title {
-    font-size: 1em;
-    text-align: center; /* Centraliza novamente em telas pequenas se for o caso */
-  }
-  .dashboard-content {
-    padding: 20px 15px;
-  }
+.summary-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+.card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.card .count {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+.card.azul {
+  background: #e1ecff;
+  color: #0d47a1;
+  border: 1px solid #90caf9;
+}
+.card.verde {
+  background: #e0f8e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+.card.laranja {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffb74d;
+}
+.charts {
+  display: flex;
+  gap: 30px;
+}
+.chart-box {
+  flex: 1;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
 }
 </style>
